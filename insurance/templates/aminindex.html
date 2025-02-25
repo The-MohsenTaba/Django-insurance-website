@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+	شرکت بیمه داشم اینا
+{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "index.css" %}">
+
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        {% block username %}
+	سلام،        {{ user.get_full_name|default:user.username }}
+        {% endblock %}
+    {% endif%}
+     <div class="button-container">
+                <button class="dashboard-button" onclick="window.location.href='{% url 'request' %}'">
+                    <img src="{% static "images/life-insurance.png"%}" alt="Option 1" class="button-icon">
+                    <span>درخواست بیمه</span>
+                </button>
+                <button class="dashboard-button" onclick="window.location.href='{% url 'extensions' %}'">
+                    <img src="{% static "images/protection.png"%}" alt="Option 2" class="button-icon">
+                    <span>تمدید بیمه</span>
+                </button>
+                <button class="dashboard-button" onclick="window.location.href='{% url 'information' %}'">
+                    <img src="{% static "images/user.png"%}" alt="Option 3" class="button-icon">
+                    <span>تکمیل اطلاعات</span>
+                </button>
+                <button class="dashboard-button" onclick="window.location.href='{% url 'requests' %}'">
+                    <img src="{% static "images/clipboard.png"%}" alt="Option 4" class="button-icon">
+                    <span>تاریخچه درخواست ها</span>
+                </button>
+            </div>
+
+{% endblock %}
+
+

@@ -1,0 +1,53 @@
+{%  load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static "app.css" %}">
+    {% block css_files %}{% endblock %}
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <nav>
+                    <a href="#" class="nav-button">
+                        <img src="{% static "images/locked-computer.png" %}" alt="Change Password" class="button-icon">
+                        تغییر رمز عبور
+                    </a>
+                    <a href="{% url "login" %}" class="nav-button" >
+                        {% csrf_token %}
+                        <img src="{% static "images/logout.png" %}" alt="Logout" class="button-icon">
+                        خروج
+                    </a>
+                </nav>
+                <div class="logo-container">
+                    <a href="{% url 'index' %}">
+                        <img src="{% static "images/insurance.png" %}" alt="Logo" class="logo">
+                    </a>
+                    <span class="company-name">شرکت بیمه داشم اینا</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <h1>{% block username %}{% endblock %}</h1>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="#">تماس با ما</a>
+                    <a href="#">دیگر سرویس ها</a>
+                </div>
+                <p>طراحی و پیاده سازی شده توسط سید حسین طباطبایی و امیرحسین کیخا</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+

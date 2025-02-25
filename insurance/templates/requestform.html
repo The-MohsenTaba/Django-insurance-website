@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+	درخواست بیمه
+{% endblock %}
+{% block css_files %}
+    <script src="{% static "script.js" %}"></script>
+    <link rel="stylesheet" href="{% static "reqformstyles.css" %}">
+{% endblock %}
+{% block content %}
+    <div class="tcontainer">
+        <h1>بیمه مورد نظر را انتخاب کنید</h1>
+        <form id="insuranceForm" method="POST" action="{% url 'request' %}">
+            {% csrf_token %}
+            <div>
+                <label>مدت زمان بیمه نامه</label>
+                {{ form.plan }}
+            </div>
+
+            <div>
+                <label>روش پرداخت</label>
+                {{ form.payment_method }}
+            </div>
+
+            <div>
+                <label for="totalPrice">مبلغ کل</label>
+                <input type="text" id="totalPrice" name="totalPrice" readonly value="1,000,000">
+            </div>
+
+            <button type="submit">ثبت</button>
+        </form>
+    </div>
+
+{% endblock %}
+

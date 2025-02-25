@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="{% static 'login.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        {% if err %}
+        	{{ err }}
+        {% endif %}
+
+        <div class="form-container">
+            <h2>ثبت نام حساب کاربری</h2>
+            <form class="signup-form" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="name">نام کاربری</label>
+                    {{ form.username }}
+                    <div class="line"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">رمزعبور</label>
+                    {{ form.password1 }}
+                    <div class="line"></div>
+                </div>
+                <div class="input-group">
+                    <label for="confirm-password">تاییدیه رمزعبور</label>
+                    {{ form.password2 }}
+                    <div class="line"></div>
+                </div>
+                <button type="submit" class="submit-btn">ثبت نام</button>
+            </form>
+            <p class="switch-text">همینجوریش اکانت داری؟ <a href="{% url 'login' %}">وارد شوید</a></p>
+        </div>
+        <div class="image-container">
+            <div class="overlay"></div>
+        </div>
+    </div>
+</body>
+</html>
+

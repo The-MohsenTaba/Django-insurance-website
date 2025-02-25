@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+	درخواست ها
+{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'extends.css' %}">
+{% endblock %}
+{% block content %}
+	 <div class="tcontainer">
+        <h1>درخواست های بیمه</h1>
+        <div class="frame">
+        {% if empty %}
+        	<h1> درخواست جدیدی وجود ندارد! </h1>
+             <button class="dashboard-button" onclick="window.location.href='{% url 'index' %}'">
+                    <img src="{% static "images/life-insurance.png"%}" alt="Option 1" class="button-icon">
+                    <span>بازگشت به خانه</span>
+                </button>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>نام کاربری</th>
+                        <th>تاریخ درخواست</th>
+                        <th>طرح بیمه</th>
+                        <th>نحوه پرداخت</th>
+                        <th>  </th>
+                        <th>  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in all_requests %}
+                        <tr>
+                            <td>{{ request.user }}</td>
+                            <td>{{ request.request_date }}</td>
+                            <td>{{ request.plan }}</td>
+                            <td>{{ request.payment_method}}</td>
+                            <td>
+                                 <form method="POST" action="{% url 'process_request' %}">
+                                     {% csrf_token %}
+                                     <input type="hidden" name="insurance_id" value="{{ request.id }}">
+                                     <input type="hidden" name="action" value="accept">
+                                     <button type="submit" class="extend-btn">تایید</button>
+                                </form>
+                            </td>
+                            <td>
+
+                                 <form method="POST" action="{% url 'process_request' %}">
+                                     {% csrf_token %}
+                                     <input type="hidden" name="insurance_id" value="{{ request.id }}">
+                                     <input type="hidden" name="action" value="reject">
+                                     <button type="submit" class="extend-btn">عدم تایید</button>
+                                </form>
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}

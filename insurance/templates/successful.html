@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    موفقیت
+{% endblock %}
+
+{% block css_files %}
+	<link rel="stylesheet" href="{% static "index.css" %}">
+{% endblock %}
+
+{% block content %}
+	<h1> عملیات با موفقیت انجام شد !</h1>
+    <button class="dashboard-button" onclick="window.location.href='{% url 'index' %}'">
+                    <img src="{% static "images/life-insurance.png"%}" alt="Option 1" class="button-icon">
+                    <span>بازگشت به خانه</span>
+    </button>
+{% endblock %}

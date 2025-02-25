@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "infostyles.css" %}">
+{% endblock %}
+{% block content %}
+
+     <div class="tcontainer">
+    <h1>فرم تکمیل اطلاعات</h1>
+    <form action="#" method="post">
+        {% csrf_token %}
+        <div class="form-row">
+            <label for="firstName">{{ form.first_name.label_tag}}</label>
+            {{form.first_name}}
+
+            <label for="lastName">{{ form.last_name.label_tag}}</label>
+            {{form.last_name}}
+        </div>
+
+        <div class="form-row">
+            <label for="fathersName">{{ form.father_name.label_tag}}</label>
+            {{form.father_name}}
+
+            <label for="idNumber">{{ form.national_id.label_tag}}</label>
+            {{form.national_id}}
+        </div>
+
+        <div class="form-row">
+            <label for="bday">{{ form.birth_date.label_tag}}</label>
+            {{ form.birth_date }}
+
+            <label for="job">{{ form.job_title.label_tag}}</label>
+            {{form.job_title}}
+        </div>
+
+        <div class="form-row">
+            <label for="sex">{{ form.sex.label_tag}}</label>
+            {{form.sex}}
+
+            <label for="marrage">{{ form.marriage.label_tag}}</label>
+            {{form.marriage}}
+        </div>
+
+        <div class="form-row">
+            <label for="jobAddress">{{ form.job_address.label_tag}}</label>
+            {{form.job_address}}
+
+            <label for="phone">{{ form.phone_number.label_tag}}</label>
+            {{ form.phone_number}}
+        </div>
+
+        <div class="form-row">
+            <label for="livingAddress">{{ form.home_address.label_tag}}</label>
+            {{form.home_address}}
+
+            <label for="postalCode">{{ form.postal_code.label_tag}}</label>
+            {{ form.postal_code}}
+        </div>
+
+        <div style="text-align:center">
+            <input type="submit" value="ثبت اطلاعات">
+        </div>
+    </form>
+</div>
+{% endblock %}
+

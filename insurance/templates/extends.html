@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css_files %}
+	<link rel="stylesheet" href="{% static "extends.css" %}">
+{% endblock %}
+{% block content %}
+    <div class="tcontainer">
+        <h1>بیمه های نیازمند تمدید</h1>
+        <div class="frame">
+        {% if empty %}
+        	<h1> هنوز وقت تمدید بیمه نشده! </h1>
+             <button class="dashboard-button" onclick="window.location.href='{% url 'index' %}'">
+                    <img src="{% static "images/life-insurance.png"%}" alt="Option 1" class="button-icon">
+                    <span>بازگشت به خانه</span>
+                </button>
+        {% else %}
+             <table>
+                <thead>
+                    <tr>
+                        <th>تاریخ ارسال</th>
+                        <th>طرح بیمه</th>
+                        <th>روش پرداخت</th>
+                        <th>مهلت تمدید</th>
+                        <th>وضعیت بیمه</th>
+                        <th>مهلت باقیمانده</th>
+                        <th>تمدید</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for insurance in insurances %}
+
+                        <tr>
+                            <td>{{ insurance.request_date }}</td>
+                            <td>{{ insurance.plan }}</td>
+                            <td>{{ insurance.payment_method }}</td>
+                            <td>{{ insurance.expired_date }}</td>
+                            <td>{{ insurance.status }}</td>
+                            <td>{{ insurance.time_left }}</td>
+                            <td>
+                                <form method="POST" action="{% url 'extensions' %}">
+                                     {% csrf_token %}
+                                     <input type="hidden" name="insurance_id" value="{{ insurance.id }}">
+                                     <input type="hidden" name="action" value="accept">
+                                     <button type="submit" class="extend-btn">تایید</button>
+                                </form>
+                            </td>
+                        </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+
+        {% endif %}
+
+        </div>
+    </div>
+
+{% endblock %}
+
+

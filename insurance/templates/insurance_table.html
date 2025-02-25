@@ -1,0 +1,54 @@
+{% extends "base.html"%}
+{% load static %}
+{% block title %}
+	insurances
+{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static "insurance_table.css" %}">
+{% endblock %}
+{% block content %}
+    <div class="tcontainer">
+        <h1>تاریخچه درخواست ها</h1>
+        <div class="frame">
+        {% if empty %}
+        	<h1> بیمه ای دریافت نشد ! </h1>
+              <div class="button-wrapper">
+                    <button class="dashboard-button" onclick="window.location.href='{% url 'index' %}'">
+                        <img src="{% static "images/life-insurance.png"%}" alt="Option 1" class="button-icon">
+                        <span>بازگشت به خانه</span>
+                    </button>
+              </div>
+        {% else %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>تاریخ درخواست</th>
+                        <th>تاریخ تایید</th>
+                        <th>طرح بیمه</th>
+                        <th>روش پرداخت</th>
+                        <th>زمان باقیمانده</th>
+                        <th>وضعیت</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                {% for insurance in insurances %}
+                    <tr>
+                        <td>{{ insurance.request_date }}</td>
+                        <td>{{ insurance.accepted_date }}</td>
+                        <td>{{ insurance.plan }}</td>
+                        <td>{{ insurance.payment_method }}</td>
+                        <td>{{ insurance.time_left }}</td>
+                        <td>{{ insurance.status }}</td>
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+            </table>
+        {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
+
